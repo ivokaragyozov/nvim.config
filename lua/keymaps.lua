@@ -11,7 +11,7 @@ which_key.add({
 
 	-- Splits
 	{ "<leader>|", "<cmd>vsplit<cr>", desc = "Split vertically" },
-	{ "<leader>-", "<cmd>hsplit<cr>", desc = "Split horizontally" },
+	{ "<leader>-", "<cmd>split<cr>", desc = "Split horizontally" },
 
 	-- NvimTree
 	{ "<leader>t", group = "NvimTree command" },
@@ -63,7 +63,8 @@ which_key.add({
 	},
 	{ "<leader>lh", "<cmd>LspClangdSwitchSourceHeader<cr>", desc = "Switch source/header" },
 	{ "<leader>li", "<cmd>lua require('fzf-lua').lsp_implementations()<cr>", desc = "Implementations" },
-	{ "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "Rename" },
+	{ "<leader>ln", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "Rename" },
+	{ "<leader>lr", "<cmd>lua require('fzf-lua').lsp_references()<cr>", desc = "References" },
 	{ "<leader>ls", group = "Symbols" },
 	{ "<leader>lsd", "<cmd>lua require('fzf-lua').lsp_document_symbols()<cr>", desc = "Document symbols" },
 	{ "<leader>lsw", "<cmd>lua require('fzf-lua').lsp_workspace_symbols()<cr>", desc = "Workspace symbols" },

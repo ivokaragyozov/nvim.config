@@ -1,27 +1,28 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-	if vim.v.shell_error ~= 0 then
-		error("Error cloning lazy.nvim:\n" .. out)
-	end
-end ---@diagnostic disable-next-line: undefined-field
-vim.opt.rtp:prepend(lazypath)
+-- Enable experimental bytecode caching
+vim.loader.enable()
+
+local lazy_path = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.uv.fs_stat(lazy_path) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"branch=stable",
+		lazy_path,
+	})
+end
+vim.opt.rtp:prepend(lazy_path)
 
 require("lazy").setup({
 	{ "nvim-tree/nvim-web-devicons" },
 	{ "nvim-lua/plenary.nvim" },
 	{
-		"catppuccin/nvim",
-		name = "catppuccin",
+		"rose-pine/neovim",
+		name = "rose-pine",
 		priority = 1000,
 		config = function()
-			require("catppuccin").setup({
-				background = {
-					light = "latte",
-					dark = "macchiato",
-				},
-			})
+			vim.cmd.colorscheme("rose-pine")
 		end,
 	},
 	{ "folke/which-key.nvim" },
@@ -39,40 +40,17 @@ require("lazy").setup({
 				},
 			},
 			ui_select = true,
-			winops = {
+			winopts = {
 				preview = {
 					winopts = { cursorline = false },
 				},
 			},
 		},
 	},
-	{ "nvim-tree/nvim-tree.lua", config = { view = { side = "left" } } },
+	{ "nvim-tree/nvim-tree.lua", opts = { view = { side = "left" } } },
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
-		lazy = false,
-		config = function()
-			require("nvim-treesitter.configs").setup({
-				ensure_installed = {
-					"c",
-					"cpp",
-					"lua",
-					"python",
-					"markdown",
-					"vim",
-					"vimdoc",
-					"query",
-					"markdown_inline",
-					"gitcommit",
-				},
-				sync_install = false,
-				auto_install = false,
-				modules = {},
-				ignore_install = {},
-				highlight = { enable = true },
-				indent = { enable = true },
-			})
-		end,
 	},
 	{
 		"mason-org/mason-lspconfig.nvim",
@@ -87,12 +65,7 @@ require("lazy").setup({
 		version = "1.*",
 		opts = {
 			keymap = {
-				preset = "default",
-				["<C-k>"] = {
-					function(cmp)
-						cmp.show()
-					end,
-				},
+				["<cr>"] = { "accept", "fallback" },
 			},
 			signature = { enabled = true },
 			completion = {
@@ -114,6 +87,15 @@ require("lazy").setup({
 						},
 					},
 				},
+			},
+		},
+	},
+	{
+		"folke/lazydev.nvim",
+		ft = "lua",
+		opts = {
+			library = {
+				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
 			},
 		},
 	},
