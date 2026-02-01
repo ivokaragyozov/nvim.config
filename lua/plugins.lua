@@ -25,6 +25,22 @@ require("lazy").setup({
 			vim.cmd.colorscheme("rose-pine")
 		end,
 	},
+	{
+		"nvim-lualine/lualine.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			require("lualine").setup({
+				sections = {
+					lualine_a = { "mode" },
+					lualine_b = { "branch", "diff" },
+					lualine_c = { "filename" },
+					lualine_x = {},
+					lualine_y = {},
+					lualine_z = { "location" },
+				},
+			})
+		end,
+	},
 	{ "folke/which-key.nvim" },
 	{ "christoomey/vim-tmux-navigator", lazy = false },
 	{ "numToStr/Comment.nvim", opts = {} },
