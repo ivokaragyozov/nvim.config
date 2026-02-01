@@ -47,7 +47,7 @@ require("lazy").setup({
 			},
 		},
 	},
-	{ "nvim-tree/nvim-tree.lua", opts = { view = { side = "left" } } },
+	{ "nvim-tree/nvim-tree.lua", opts = { view = { side = "left", adaptive_size = true } } },
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
