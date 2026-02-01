@@ -14,7 +14,7 @@ which_key.add({
 	{ "<leader>-", "<cmd>split<cr>", desc = "Split horizontally" },
 
 	-- NvimTree
-	{ "<leader>t", group = "NvimTree command" },
+	{ "<leader>t", group = "NvimTree commands" },
 	{ "<leader>tt", "<cmd>NvimTreeToggle<cr>", desc = "Toggle file tree" },
 	{ "<leader>tf", "<cmd>NvimTreeFindFile<cr>", desc = "Find file in tree" },
 	{ "<leader>tc", "<cmd>NvimTreeCollapse<cr>", desc = "Collapse file tree" },
