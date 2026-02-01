@@ -33,7 +33,17 @@ which_key.add({
 	{ "<leader>fb", "<cmd>lua require('fzf-lua').buffers()<cr>", desc = "Buffers" },
 	{ "<leader>fd", "<cmd>lua require('fzf-lua').diagnostics_document()<cr>", desc = "Diagnostics" },
 	{ "<leader>ff", "<cmd>lua require('fzf-lua').files()<cr>", desc = "Files" },
+	{
+		"<leader>fF",
+		"<cmd>lua require('fzf-lua').files({ fd_opts = '--no-ignore --type f --hidden' })<cr>",
+		desc = "Files (include hidden)",
+	},
 	{ "<leader>fg", "<cmd>lua require('fzf-lua').live_grep_native()<cr>", desc = "Live grep" },
+	{
+		"<leader>fG",
+		"<cmd>lua require('fzf-lua').live_grep_native({ rg_opts = '--column --no-ignore --hidden' })<cr>",
+		desc = "Live grep (include hidden)",
+	},
 	{ "<leader>fh", "<cmd>lua require('fzf-lua').helptags()<cr>", desc = "Help" },
 
 	-- Git
